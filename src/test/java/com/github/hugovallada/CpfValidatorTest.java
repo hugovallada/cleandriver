@@ -20,6 +20,5 @@ class CpfValidatorTest {
     void shouldReturnFalseWhenCpfIsInvalid(String cpf) {
         boolean isValid = CpfValidator.validate(cpf);
         assertFalse(isValid);
-        assertTrue(isValid);
     }
 }

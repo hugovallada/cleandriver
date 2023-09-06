@@ -20,14 +20,11 @@ class AccountServiceTest {
 	@Test
 	@Transactional
 	void shouldCreateAPassenger() {
-		// given
 		var input = new AccountRequest("John", "john.doe" + Math.random() + "@gmail.com", "95818705552", null, true,
 				false, null);
 		var accountService = new AccountService();
-		// when
 		var output = accountService.signup(input);
 		var account = accountService.getAccount(output);
-		// then
 		assertEquals(input.name(), account.name);
 		assertEquals(input.email(), account.email);
 		assertEquals(input.cpf(), account.cpf);
