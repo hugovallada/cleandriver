@@ -20,10 +20,9 @@ public class AccountService {
 	}
 
 	@Transactional
-	public Long signup(AccountRequest input) {
+	public UUID signup(AccountRequest input) {
 		log.info("Creating account for " + input.email());
 		final var verificationCode = UUID.randomUUID();
-		final var date = LocalDateTime.now();
 		final var existingAccount = Account.find(EMAIL_PARAM, input.email()).firstResultOptional();
 		if (existingAccount.isPresent())
 			throw new AccountCreationException("Email already in use");
@@ -38,10 +37,10 @@ public class AccountService {
 		val account = input.toAccount(verificationCode.toString());
 		account.persist();
 		sendEmail(account.email, "Verify your email", "Your verification code is " + verificationCode);
-		return account.id;
+		return account.accountId;
 	}
 
-	public Account getAccount(Long id) {
+	public Account getAccount(UUID id) {
 		return Account.findById(id);
 	}
 }

@@ -1,12 +1,21 @@
 package com.github.hugovallada;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
-public class Account extends PanacheEntity {
+public class Account extends PanacheEntityBase {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    public UUID accountId;
     public String name;
     public String email;
     public String cpf;
