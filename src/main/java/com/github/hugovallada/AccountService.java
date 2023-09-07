@@ -6,7 +6,6 @@ import lombok.experimental.ExtensionMethod;
 import lombok.extern.jbosslog.JBossLog;
 import lombok.val;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 @ApplicationScoped
