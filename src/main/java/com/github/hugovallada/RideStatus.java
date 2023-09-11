@@ -1,5 +1,5 @@
 package com.github.hugovallada;
 
 public enum RideStatus {
-	REQUESTED, ACCEPTED, STARTED, COMPLETED, CANCELLED;
+	REQUESTED, ACCEPTED, IN_PROGRESS, COMPLETED, CANCELLED;
 }

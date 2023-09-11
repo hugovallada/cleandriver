@@ -1,12 +1,10 @@
 package com.github.hugovallada;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -24,6 +22,9 @@ public class Account extends PanacheEntityBase {
 	public LocalDateTime date;
 	public boolean isVerified;
 	public String verificationCode;
+
+	@ManyToMany(mappedBy = "passenger")
+	public List<Ride> rides;
 
 	/**
 	 * @since always
