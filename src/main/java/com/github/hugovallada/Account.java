@@ -23,7 +23,10 @@ public class Account extends PanacheEntityBase {
 	public boolean isVerified;
 	public String verificationCode;
 
-	@ManyToMany(mappedBy = "passenger")
+	@ManyToMany
+	@JoinTable(name = "account_ride",
+			joinColumns = @JoinColumn(name = "account_id"),
+			inverseJoinColumns = @JoinColumn(name = "ride_id"))
 	public List<Ride> rides;
 
 	/**
