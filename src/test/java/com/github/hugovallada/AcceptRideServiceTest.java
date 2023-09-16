@@ -22,9 +22,9 @@ class AcceptRideServiceTest {
 	@Transactional
 	void setUpAll() {
 		final var passengerAccount = new AccountRequest("John", "john.doe" + Math.random() + "@gmail.com", "95818705552", null, true,
-				false, null);
+				false);
 		final var driverAccount = new AccountRequest("John", "john.doe" + Math.random() + "@gmail.com", "95818705552", "AAA-9999",
-				false, true, null);
+				false, true);
 		final var accountService = new AccountService();
 		passengerId = accountService.signup(passengerAccount);
 		driverId = accountService.signup(driverAccount);

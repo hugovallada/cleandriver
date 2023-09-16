@@ -20,7 +20,7 @@ class AccountServiceTest {
 	@Transactional
 	void shouldCreateAPassenger() {
 		var input = new AccountRequest("John", "john.doe" + Math.random() + "@gmail.com", "95818705552", null, true,
-				false, null);
+				false);
 		var accountService = new AccountService();
 		var output = accountService.signup(input);
 		var account = accountService.getAccount(output);
@@ -34,7 +34,7 @@ class AccountServiceTest {
 	@Transactional
 	void shouldCreateADriver() {
 		var input = new AccountRequest("John", "john.doe" + Math.random() + "@gmail.com", "95818705552", "AAA-9999",
-				true, true, null);
+				true, true);
 		var accountService = new AccountService();
 		var output = accountService.signup(input);
 		var account = accountService.getAccount(output);
@@ -48,7 +48,7 @@ class AccountServiceTest {
 	@Transactional
 	void shouldNotCreateAPassengerWithExistingAccount() {
 		var input = new AccountRequest("John", "john.doe" + Math.random() + "@gmail.com", "95818705552", null, true,
-				false, null);
+				false);
 		var accountService = new AccountService();
 		accountService.signup(input);
 		assertThrows(AccountCreationException.class, () -> accountService.signup(input));
@@ -72,16 +72,16 @@ class AccountServiceTest {
 					new TestTable("shouldNotCreateAPassengerWithInvalidCpf",
 							new AccountRequest("John",
 									"john.doe" + Math.random() + "@gmail.com", "95818705500",
-									null, true, false, null)),
+									null, true, false)),
 					new TestTable("shouldNotCreateAPassengerWithInvalidName",
 							new AccountRequest("John Doe", "john.doe" + Math.random() + "@gmail.com",
-									"95818705552", null, true, false, null)),
+									"95818705552", null, true, false)),
 					new TestTable("shouldNotCreateAPassengerWithInvalidEmail",
 							new AccountRequest("John", "john.doe" + Math.random(), "95818705552",
-									null, true, false, null)),
+									null, true, false)),
 					new TestTable("shouldNotCreateADriverWithAnInvalidPlate",
 							new AccountRequest("John", "john.doe" + Math.random() + "@gmail.com",
-									"95818705552", "AAA999", false, true, null))
+									"95818705552", "AAA999", false, true))
 			);
 		}
 	}

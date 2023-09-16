@@ -1,12 +1,12 @@
 package com.github.hugovallada;
 
+import java.util.UUID;
+
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
+import lombok.val;
 import lombok.experimental.ExtensionMethod;
 import lombok.extern.jbosslog.JBossLog;
-import lombok.val;
-
-import java.util.UUID;
 
 @ApplicationScoped
 @ExtensionMethod(Extensions.class)

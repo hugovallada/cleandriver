@@ -1,17 +1,21 @@
 package com.github.hugovallada;
 
-import io.quarkus.test.junit.QuarkusTest;
-import jakarta.transaction.Transactional;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.time.LocalDateTime;
+import java.util.UUID;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
-import java.time.LocalDateTime;
-import java.util.UUID;
-
-import static org.junit.jupiter.api.Assertions.*;
+import io.quarkus.test.junit.QuarkusTest;
+import jakarta.transaction.Transactional;
 
 @QuarkusTest
 @TestMethodOrder(OrderAnnotation.class)
@@ -22,10 +26,12 @@ class RequestRideServiceTest {
 	@BeforeAll
 	@Transactional
 	static void setUp() {
-		final var passengerAccount = new AccountRequest("John", "john.doe" + Math.random() + "@gmail.com", "95818705552", null, true,
-				false, null);
-		final var driverAccount = new AccountRequest("John", "john.doe" + Math.random() + "@gmail.com", "95818705552", "AAA-9999",
-				false, true, null);
+		final var passengerAccount = new AccountRequest("John", "john.doe" + Math.random() + "@gmail.com",
+				"95818705552", null, true,
+				false);
+		final var driverAccount = new AccountRequest("John", "john.doe" + Math.random() + "@gmail.com", "95818705552",
+				"AAA-9999",
+				false, true);
 		final var accountService = new AccountService();
 		passengerId = accountService.signup(passengerAccount);
 		driverId = accountService.signup(driverAccount);
@@ -35,7 +41,8 @@ class RequestRideServiceTest {
 	@Test
 	@Order(1)
 	void shouldCreateANewRide() {
-		final var ride = new RideDTORequest(passengerId, new Coordinates(-23.563099, -46.656571), new Coordinates(-23.563099, -46.656571));
+		final var ride = new RideDTORequest(passengerId, new Coordinates(-23.563099, -46.656571),
+				new Coordinates(-23.563099, -46.656571));
 		final var requestRideService = new RequestRideService();
 		final var output = requestRideService.requestRide(ride);
 		final var createdRide = requestRideService.getRide(output);
@@ -54,7 +61,8 @@ class RequestRideServiceTest {
 	@Transactional
 	@Order(2)
 	void shouldNotCreateARideIfTheRequesterAlreadyHasARideInProgress() {
-		final var ride = new RideDTORequest(passengerId, new Coordinates(-23.563099, -46.656571), new Coordinates(-23.563099, -46.656571));
+		final var ride = new RideDTORequest(passengerId, new Coordinates(-23.563099, -46.656571),
+				new Coordinates(-23.563099, -46.656571));
 		final var requestRideService = new RequestRideService();
 		assertThrows(RideRequestException.class, () -> requestRideService.requestRide(ride));
 	}
@@ -62,7 +70,8 @@ class RequestRideServiceTest {
 	@Test
 	@Order(3)
 	void shouldNotCreateARideIfTheRequesterIsNotAPassenger() {
-		final var ride = new RideDTORequest(driverId, new Coordinates(-23.563099, -46.656571), new Coordinates(-23.563099, -46.656571));
+		final var ride = new RideDTORequest(driverId, new Coordinates(-23.563099, -46.656571),
+				new Coordinates(-23.563099, -46.656571));
 		final var requestRideService = new RequestRideService();
 		assertThrows(RideRequestException.class, () -> requestRideService.requestRide(ride));
 	}
