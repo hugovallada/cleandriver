@@ -1,0 +1,198 @@
+_type: export
+__export_format: 4
+__export_date: 2023-09-16T21:40:28.602Z
+__export_source: insomnia.desktop.app:v2023.5.7
+resources:
+  - _id: req_8046f5b4b5a74578b518f513f3e53d9e
+    parentId: fld_aa4f79e7471e475da38b57366882d1f8
+    modified: 1694899505112
+    created: 1694899091185
+    url: "{{ _.localhost }}/rides"
+    name: Ride
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"accountId": "f4452d55-e2ad-4970-acf9-2a5dd39e6fa9",
+        	"from": {
+        		"latitude": 22.90,
+        		"longitude": 33.82
+        	},
+        	"to": {
+        		"latitude": 33.23,
+        		"longitude":44.33
+        	}
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: Insomnia/2023.5.7
+    authentication: {}
+    metaSortKey: -1694899091185
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_aa4f79e7471e475da38b57366882d1f8
+    parentId: wrk_487971756bc849eb9229d79f75bef046
+    modified: 1694899087239
+    created: 1694899087239
+    name: Ride
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1694899087239
+    _type: request_group
+  - _id: wrk_487971756bc849eb9229d79f75bef046
+    parentId: null
+    modified: 1694867047690
+    created: 1694867047690
+    name: Clean Driver
+    description: ""
+    scope: collection
+    _type: workspace
+  - _id: req_2474e72acd75470d92b6393b5208b0fb
+    parentId: fld_aa4f79e7471e475da38b57366882d1f8
+    modified: 1694900135376
+    created: 1694900007225
+    url: "{{ _.localhost
+      }}/rides/2094b0b2-5a48-4374-9528-4770b60e5c26/accept/11db9494-1249-4391-b\
+      5b4-3e002456ef2c"
+    name: Accept Ride
+    description: ""
+    method: POST
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: Insomnia/2023.5.7
+    authentication: {}
+    metaSortKey: -1694899087726
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_a0d01ff9130948f99d336f7d303cb350
+    parentId: fld_aa4f79e7471e475da38b57366882d1f8
+    modified: 1694899526938
+    created: 1694899515723
+    url: "{{ _.localhost }}/rides/2094b0b2-5a48-4374-9528-4770b60e5c26"
+    name: Ride
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: Insomnia/2023.5.7
+    authentication: {}
+    metaSortKey: -1694899084267
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_5f747935fa2a491f95070559b940884d
+    parentId: fld_ad894d8662004d5daf1c9f89fad0839b
+    modified: 1694900107450
+    created: 1694867050420
+    url: http://localhost:8080/accounts
+    name: Account
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name": "HugoDriver",
+        	"email": "hugodriver@gmail.com",
+        	"cpf":"73656401039",
+        	"carPlate": "DKB-8971",
+        	"isPassenger": false,
+        	"isDriver": true
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: Insomnia/2023.5.7
+    authentication: {}
+    metaSortKey: -1694899077349
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_ad894d8662004d5daf1c9f89fad0839b
+    parentId: wrk_487971756bc849eb9229d79f75bef046
+    modified: 1694899071312
+    created: 1694899071312
+    name: Account
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1694899071312
+    _type: request_group
+  - _id: req_13d236aaa61e463aa0fd9396b62ec7ba
+    parentId: fld_ad894d8662004d5daf1c9f89fad0839b
+    modified: 1694899480901
+    created: 1694868838672
+    url: http://localhost:8080/accounts/f4452d55-e2ad-4970-acf9-2a5dd39e6fa9
+    name: Account
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: Insomnia/2023.5.7
+    authentication: {}
+    metaSortKey: -1694899077249
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_dbaa443e619e74d47f6f2670f29163b497a9947a
+    parentId: wrk_487971756bc849eb9229d79f75bef046
+    modified: 1694899142708
+    created: 1694867047696
+    name: Base Environment
+    data:
+      localhost: http://localhost:8080
+    dataPropertyOrder:
+      "&":
+        - localhost
+    color: null
+    isPrivate: false
+    metaSortKey: 1694867047696
+    _type: environment
+  - _id: jar_dbaa443e619e74d47f6f2670f29163b497a9947a
+    parentId: wrk_487971756bc849eb9229d79f75bef046
+    modified: 1694867047698
+    created: 1694867047698
+    name: Default Jar
+    cookies: []
+    _type: cookie_jar
