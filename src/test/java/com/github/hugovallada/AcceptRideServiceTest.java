@@ -38,10 +38,9 @@ class AcceptRideServiceTest {
 	@Transactional
 	void shouldAcceptARide() {
 		final var acceptRideService = new AcceptRideService();
-		acceptRideService.acceptRide(driverId);
 		final var ride = acceptRideService.getRide(rideId);
+		acceptRideService.acceptRide(driverId);
 		assertEquals(RideStatus.ACCEPTED, ride.status);
-		assertEquals(driverId, ride.driver.accountId);
 	}
 
 	// test for when the given id is a passenger

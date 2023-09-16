@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -18,11 +20,8 @@ public class Ride extends PanacheEntityBase {
 
 	public LocalDateTime date;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	public Account passenger;
-
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	public Account driver;
+	@ManyToMany(mappedBy = "rides")
+	public List<Account> accounts = new ArrayList<>();
 
 	public BigDecimal fare;
 
@@ -46,7 +45,7 @@ public class Ride extends PanacheEntityBase {
 	public Ride(Account passenger, Coordinates from, Coordinates to) {
 		this.status = RideStatus.REQUESTED;
 		this.date = LocalDateTime.now();
-		this.passenger = passenger;
+		this.accounts.add(passenger);
 		this.fromLat = from.latitude();
 		this.fromLong = from.longitude();
 		this.toLat = to.latitude();

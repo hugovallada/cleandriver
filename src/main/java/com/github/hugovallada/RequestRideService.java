@@ -6,6 +6,7 @@ import lombok.extern.jbosslog.JBossLog;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @ApplicationScoped
 @JBossLog
@@ -15,7 +16,8 @@ public class RequestRideService {
 	public UUID requestRide(RideDTORequest rideDTORequest) {
 		final Account account = Account.findById(rideDTORequest.accountId());
 		if (!account.isPassenger) throw new RideRequestException("É preciso ser um passageiro");
-		final List<Ride> rides = Ride.find("passenger = ?1 AND status != 'COMPLETED' ", account).list();
+		List<Ride> rides = Ride.find("status != 'COMPLETED'").list();
+		rides = rides.stream().filter(ride -> ride.accounts.contains(account)).collect(Collectors.toList());
 		if (!rides.isEmpty()) throw new RideRequestException("Você já tem uma corrida em andamento");
 		final var ride = new Ride(account, rideDTORequest.from(), rideDTORequest.to());
 		ride.persist();
