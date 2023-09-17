@@ -20,7 +20,10 @@ public class Ride extends PanacheEntityBase {
 
     public LocalDateTime date;
 
-    @ManyToMany(mappedBy = "rides")
+    @ManyToMany
+    @JoinTable(name = "account_ride",
+            joinColumns = @JoinColumn(name = "ride_id"),
+            inverseJoinColumns = @JoinColumn(name = "account_id"))
     public List<Account> accounts = new ArrayList<>();
 
     public BigDecimal fare;
