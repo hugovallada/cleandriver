@@ -24,11 +24,12 @@ public class Account extends PanacheEntityBase {
     public boolean isVerified;
     public String verificationCode;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "account_ride",
             joinColumns = @JoinColumn(name = "account_id"),
             inverseJoinColumns = @JoinColumn(name = "ride_id"))
     public List<Ride> rides = new ArrayList<>();
+
 
     /**
      * @since always

@@ -20,7 +20,7 @@ public class Ride extends PanacheEntityBase {
 
     public LocalDateTime date;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "account_ride",
             joinColumns = @JoinColumn(name = "ride_id"),
             inverseJoinColumns = @JoinColumn(name = "account_id"))
@@ -54,6 +54,10 @@ public class Ride extends PanacheEntityBase {
         this.fromLong = from.longitude();
         this.toLat = to.latitude();
         this.toLong = to.longitude();
+    }
+
+    public List<Account> getAccounts() {
+        return accounts;
     }
 
 }
