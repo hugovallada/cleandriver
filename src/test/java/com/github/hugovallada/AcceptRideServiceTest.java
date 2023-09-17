@@ -15,6 +15,8 @@ class AcceptRideServiceTest {
     private static UUID passengerId;
     private static UUID driverId;
 
+    private static UUID secondDriver;
+
     private static UUID rideId;
 
     private static AcceptRideData acceptRideData;
@@ -27,9 +29,12 @@ class AcceptRideServiceTest {
                 false);
         final var driverAccount = new AccountRequest("John", "john.doe" + Math.random() + "@gmail.com", "95818705552", "AAA-9999",
                 false, true);
+        final var newDriver = new AccountRequest("John", "john.doe" + Math.random() + "@gmail.com", "95818705552", "AAA-9999",
+                false, true);
         final var accountService = new AccountService();
         passengerId = accountService.signup(passengerAccount);
         driverId = accountService.signup(driverAccount);
+        secondDriver = accountService.signup(newDriver);
         final var ride = new RideDTORequest(passengerId, new Coordinates(-23.563099, -46.656571), new Coordinates(-23.563099, -46.656571));
         final var requestRideService = new RequestRideService();
         rideId = requestRideService.requestRide(ride);
@@ -59,7 +64,10 @@ class AcceptRideServiceTest {
     @Transactional
     void shouldNotAcceptARideIfThereIsNoRideAvailable() {
         final var acceptRideService = new AcceptRideService();
-        acceptRideService.acceptRide(acceptRideData);
+        acceptRideService.acceptRide(AcceptRideData.builder()
+                .rideId(rideId)
+                .driverId(secondDriver)
+                .build());
         assertThrows(RideAcceptanceException.class, () -> acceptRideService.acceptRide(acceptRideData));
     }
 

@@ -20,7 +20,7 @@ public class Ride extends PanacheEntityBase {
 
     public LocalDateTime date;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "account_ride",
             joinColumns = @JoinColumn(name = "ride_id"),
             inverseJoinColumns = @JoinColumn(name = "account_id"))
