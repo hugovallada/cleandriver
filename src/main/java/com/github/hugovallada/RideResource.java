@@ -12,9 +12,14 @@ public class RideResource {
     private final RequestRideService requestRideService;
     private final AcceptRideService acceptRideService;
 
-    public RideResource(RequestRideService requestRideService, AcceptRideService acceptRideService) {
+    private final StartRideService startRideService;
+
+    public RideResource(RequestRideService requestRideService,
+                        AcceptRideService acceptRideService,
+                        StartRideService startRideService) {
         this.requestRideService = requestRideService;
         this.acceptRideService = acceptRideService;
+        this.startRideService = startRideService;
     }
 
     @POST
@@ -29,6 +34,12 @@ public class RideResource {
                 .rideId(rideId)
                 .driverId(driverId)
                 .build());
+    }
+
+    @POST
+    @Path("/{rideId}/start/{driverId}")
+    public void startRide(@PathParam("rideId") UUID rideId, @PathParam("driverId") UUID driverId) {
+        startRideService.execute(driverId, rideId);
     }
 
     @GET

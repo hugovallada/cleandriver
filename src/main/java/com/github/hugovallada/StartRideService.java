@@ -1,12 +1,14 @@
 package com.github.hugovallada;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.transaction.Transactional;
 
 import java.util.UUID;
 
 @ApplicationScoped
 public class StartRideService {
 
+    @Transactional
     public void execute(UUID driverId, UUID rideId) {
         final Ride ride = Ride.findById(rideId);
         if (!ride.accounts.contains(Account.findById(driverId)))

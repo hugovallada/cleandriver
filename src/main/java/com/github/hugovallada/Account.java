@@ -51,5 +51,5 @@ public class Account extends PanacheEntityBase {
         this.isVerified = isVerified;
         this.verificationCode = verificationCode;
     }
-
+    
 }
